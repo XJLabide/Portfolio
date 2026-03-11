@@ -1,29 +1,41 @@
+import {
+  parseContactFormData,
+  validateContactFormData,
+  type ContactSubmissionResult,
+} from "../contact";
 
+export async function sendEmail(form: HTMLFormElement): Promise<ContactSubmissionResult> {
+  const nameField = form.elements.namedItem("name");
+  const emailField = form.elements.namedItem("email");
+  const messageField = form.elements.namedItem("message");
 
-import emailjs from '@emailjs/browser';
+  const data = parseContactFormData({
+    name: nameField instanceof HTMLInputElement ? nameField.value : "",
+    email: emailField instanceof HTMLInputElement ? emailField.value : "",
+    message: messageField instanceof HTMLTextAreaElement ? messageField.value : "",
+  });
 
-export const sendEmail = async (
-  form: HTMLFormElement
-): Promise<{ success: boolean; message: string }> => {
+  const validationError = validateContactFormData(data);
+
+  if (validationError) {
+    return { success: false, message: validationError };
+  }
+
   try {
-   
-    emailjs.init('WHKSqBwbhPRSRZF2B');
+    const response = await fetch("/api/contact", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
 
-    await emailjs.sendForm(
-      'service_v8g2r8d',
-      'template_xfgnljs',
-      form
-    );
-
-    return {
-      success: true,
-      message: "Message sent successfully!",
-    };
-  } catch (error) {
-    console.error("Failed to send email:", error);
+    const result = (await response.json()) as ContactSubmissionResult;
+    return result;
+  } catch {
     return {
       success: false,
-      message: "Failed to send message. Please try again later.",
+      message: "Unable to submit the form right now. Please try again later.",
     };
   }
-};
+}

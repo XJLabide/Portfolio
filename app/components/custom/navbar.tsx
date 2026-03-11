@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Link from "next/link";
+import { navSections } from "../../lib/site-content";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -22,7 +22,7 @@ export default function Navbar() {
       }
 
       lastScrollY = currentScrollY;
-      const sections = ['home', 'about', 'projects', 'skills', 'approach', 'contact'];
+      const sections = navSections.map((section) => section.href);
       for (const section of sections) {
         const element = document.getElementById(section);
         if (element) {
@@ -52,15 +52,6 @@ export default function Navbar() {
     }
   };
 
-  const navItems = [
-    { name: "Xander", href: "hero" },
-    { name: "About", href: "about" },
-    { name: "Projects", href: "projects" },
-    { name: "Skills", href: "skills" },
-    { name: "Approach", href: "approach" },
-    { name: "Contact", href: "contact" },
-  ];
-
   return (
     <header
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 transform
@@ -72,7 +63,7 @@ export default function Navbar() {
       <div className="w-full px-4 md:px-8">
         <nav className="flex justify-end space-x-8">
           <div className="hidden md:flex items-center justify-center space-x-8">
-            {navItems.map((item) => (
+            {navSections.map((item) => (
               <a
                 key={item.href}
                 href={`#${item.href}`}

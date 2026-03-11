@@ -1,36 +1,35 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Xander Portfolio
 
-## Getting Started
+Personal portfolio site built with Next.js 15, React 19, and Tailwind CSS.
 
-First, run the development server:
+## Scripts
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run lint
+npm run build
+npm run check
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The local dev server defaults to `http://localhost:3000`. Pass `-- --port 3001` if you want it on `3001`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Contact Form Setup
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The contact form now submits through the server route at `/api/contact`. It requires EmailJS credentials in environment variables instead of shipping provider identifiers in the browser bundle.
 
-## Learn More
+1. Copy `.env.example` to `.env.local`.
+2. Fill in your EmailJS service ID, template ID, public key, private key, and destination email.
+3. Restart the dev server.
 
-To learn more about Next.js, take a look at the following resources:
+If the variables are missing, the form will return a clear configuration error instead of silently failing.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Quality Gates
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- `npm run lint` must pass.
+- `npm run build` must pass.
+- `npm run check` runs both commands together.
 
-## Deploy on Vercel
+## Notes
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Remote images are allowlisted in [next.config.ts](/Users/xander/Documents/Projects/Experiment/xander-portfolio/next.config.ts).
+- Portfolio content is centralized in [app/lib/site-content.ts](/Users/xander/Documents/Projects/Experiment/xander-portfolio/app/lib/site-content.ts) to keep navigation and section data in sync.

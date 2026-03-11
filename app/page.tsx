@@ -4,34 +4,39 @@ import Projects from "./pages/projects";
 import Skills from "./pages/skills";
 import Approach from "./pages/approach";
 import Getintouch from "./pages/getintouch";
+import Footer from "./components/custom/footer";
+import { navSections } from "./lib/site-content";
 
 export default function Home() {
+  const sectionClassNames: Partial<Record<(typeof navSections)[number]["href"], string>> = {
+    about: "min-h-screen",
+    projects: "min-h-screen",
+    skills: "min-h-screen",
+    approach: "min-h-screen",
+    contact: "min-h-screen",
+  };
+
+  const sectionComponents = {
+    hero: <Hero />,
+    about: <About />,
+    projects: <Projects />,
+    skills: <Skills />,
+    approach: <Approach />,
+    contact: <Getintouch />,
+  };
+
   return (
     <div className="space-y-0 bg-black">
-    
-      <section id="hero">
-        <Hero />
-      </section>
-      
-      <section id="about" className="min-h-screen">
-        <About />
-      </section>
-      
-      <section id="projects" className="min-h-screen">
-        <Projects />
-      </section>
-    
-      <section id="skills" className="min-h-screen">
-        <Skills />
-      </section>
-    
-      <section id="approach" className="min-h-screen">
-        <Approach />
-      </section>
-      
-      <section id="contact" className="min-h-screen">
-        <Getintouch />
-      </section>
+      {navSections.map((section) => (
+        <section
+          key={section.href}
+          id={section.href}
+          className={sectionClassNames[section.href]}
+        >
+          {sectionComponents[section.href]}
+        </section>
+      ))}
+      <Footer />
     </div>
   );
 }

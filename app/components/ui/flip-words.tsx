@@ -1,6 +1,6 @@
 "use client";
-import React, { useCallback, useEffect, useRef, useState } from "react";
-import { AnimatePresence, motion, LayoutGroup } from "motion/react";
+import React, { useCallback, useEffect, useState } from "react";
+import { AnimatePresence, motion } from "motion/react";
 import { cn } from "../../lib/utils";
 
 export const FlipWords = ({
@@ -22,10 +22,15 @@ export const FlipWords = ({
   }, [currentWord, words]);
 
   useEffect(() => {
-    if (!isAnimating)
-      setTimeout(() => {
+    if (isAnimating) {
+      return undefined;
+    }
+
+    const timeoutId = window.setTimeout(() => {
         startAnimation();
       }, duration);
+
+    return () => window.clearTimeout(timeoutId);
   }, [isAnimating, duration, startAnimation]);
 
   return (
