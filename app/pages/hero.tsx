@@ -24,7 +24,7 @@ export default function Hero() {
               className="mb-8 flex flex-wrap items-center gap-3 text-[11px] uppercase tracking-[0.35em] text-[#f6f1e8]/60"
             >
               <span className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-[#c2ff6b]">
-                AI Builder / Creative Technologist
+                AI Engineer / Software Developer
               </span>
               <span>Portfolio / 2026</span>
               <span className="h-px w-10 bg-white/15" />
@@ -65,11 +65,8 @@ export default function Hero() {
                 className="mt-8 max-w-2xl"
               >
                 <p className="text-xl leading-tight text-[#f6f1e8]/88 sm:text-2xl lg:text-3xl">
-                  I craft AI automations, RAG systems, LLM-powered tools, and polished product experiences for
-                  <span className="mx-2 inline-block rounded-full border border-[#f6f1e8]/15 bg-white/5 px-3 py-1 text-sm align-middle uppercase tracking-[0.3em] text-[#ff7b54] sm:text-base">
-                    modern clients
-                  </span>
-                  who need intelligence that actually ships.
+                  I craft AI automations, RAG systems, and AI-integrated products for teams
+                  that need intelligence that scales and ships.
                 </p>
               </motion.div>
 

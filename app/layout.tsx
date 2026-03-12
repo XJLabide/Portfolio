@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Navbar from "./components/custom/navbar";
+import AppShell from "./components/custom/app-shell";
 
 export const metadata: Metadata = {
   title: "Xander Jacob Labide",
@@ -15,10 +15,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className="antialiased bg-black text-white min-h-screen">
-        <Navbar />
-        <div className="min-h-[calc(100vh-4rem)]">
-          {children}
-        </div>
+        <AppShell>{children}</AppShell>
       </body>
     </html>
   );
